@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
+    android:background="@color/AliceBlue"
 
     >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="custom tweets"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/SkyBlue"
@@ -21,7 +21,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="tweet App">
 
 
         <ImageButton
@@ -30,8 +31,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="right"
-            android:src="@drawable/icone"
             android:clickable="true"
+            android:src="@drawable/icone"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.appcompat.widget.Toolbar>

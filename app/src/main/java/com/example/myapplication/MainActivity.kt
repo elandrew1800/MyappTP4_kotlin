@@ -1,17 +1,20 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.OnClickAction
+import android.os.PersistableBundle
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.detail.DetailActivity
 import com.example.myapplication.models.Tweet
 import com.example.myapplication.view.TweetAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,28 +29,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tweetList = ArrayList()
-
-
-
-        val addBtn = findViewById<ImageButton>(R.id.add)
-        val delete =findViewById<LinearLayout>(R.id.item1)
-
-
-
         recv = findViewById(R.id.recycle)
-
         tweetAdapter =TweetAdapter(this,tweetList)
-
         recv.layoutManager =LinearLayoutManager(this)
         recv.adapter = tweetAdapter
 
+        val addBtn = findViewById<ImageButton>(R.id.add)
 
-
-
+        tweetAdapter.onItemClick ={
+            val intent= Intent(this, DetailActivity::class.java)
+            intent.putExtra("user",it)
+            startActivity(intent)
+        }
         addBtn.setOnClickListener { addinfo() }
+
     }
-
-
 
     private fun addinfo() {
         val inflter =LayoutInflater.from(this)
@@ -62,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 dialog,_->
                 val tweety = tweet.text.toString()
                 val userName = user.text.toString()
-                tweetList.add(Tweet("Elamine bouchafa: $userName","tweets: $tweety"))
+                tweetList.add(Tweet("Elamine bouchafa: $userName","$tweety"))
                 tweetAdapter.notifyDataSetChanged()
                 Toast.makeText(this,"adding tweet done !", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
